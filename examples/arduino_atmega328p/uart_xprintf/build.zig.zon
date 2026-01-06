@@ -1,0 +1,16 @@
+.{
+    .name = .uart_xprintf_int,
+    .version = "0.0.1",
+    .fingerprint = 0xb8d9feedd119e19, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .avrio_zig = .{
+            .path = "../../../",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

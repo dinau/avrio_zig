@@ -1,0 +1,12 @@
+.{
+    .name = .delay,
+    .version = "0.0.1",
+    .fingerprint = 0xb29a809b8662857b, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
