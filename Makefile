@@ -24,7 +24,6 @@ cleancache:
 #
 define def_make
 	@echo ==== Enter: $(1) ====
-	@echo zig-$(shell zig version)
 	@-$(MAKE) -C  $(1) $(2)
 	@#$(MAKE) -C  $(1) cleancache
 

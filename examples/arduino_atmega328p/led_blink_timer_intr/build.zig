@@ -3,6 +3,7 @@ const std = @import("std");
 pub fn build(b: *std.Build) !void {
     const main_file_name = "main";
     const out_file_name = "led_blink_timer_intr";
+
     const cpu = std.Target.Query{
         .cpu_arch = .avr,
         .cpu_model = .{ .explicit = &std.Target.avr.cpu.atmega328p },
@@ -41,19 +42,25 @@ pub fn build(b: *std.Build) !void {
     const hex_file_name = b.fmt("{s}.hex", .{out_file_name});
     const lst_file_name = b.fmt("{s}.lst", .{out_file_name});
 
-    // Use current directory for temporary files, then install to zig-out
-    const elf_file = elf_file_name;
-    const hex_file = hex_file_name;
+    const cache_dir = b.cache_root.path orelse ".zig-cache";
+    const elf_file = b.pathJoin(&.{ cache_dir, elf_file_name });
+    const hex_file = b.pathJoin(&.{ cache_dir, hex_file_name });
 
     // Link with avr-gcc to create ELF
     const avr_gcc = b.addSystemCommand(&.{
         "avr-gcc",
         "-mmcu=atmega328p",
         "-Os",
+        "-Wl,--gc-sections",
+        //        "-Wl,--print-gc-sections",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-flto",
         "-o",
         elf_file,
     });
     avr_gcc.addFileArg(obj_file);
+    avr_gcc.addArg("-lm");
 
     // Install ELF file to zig-out/bin
     const install_elf = b.addInstallBinFile(.{ .cwd_relative = elf_file }, elf_file_name);

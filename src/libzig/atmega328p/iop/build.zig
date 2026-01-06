@@ -19,13 +19,13 @@ pub fn build(b: *std.Build) void {
         });
     } else { // Generate io.zig in .zig-cache, rename io.zig to atmega328p.zig and modifiy it.
         const step = b.addTranslateC(.{
-            .root_source_file = b.path("../../libc/avr/include/avr/io.h"),
+            .root_source_file = b.path("../../../libc/avr/include/avr/io.h"),
             .target = target,
             .optimize = optimize,
         });
         step.defineCMacro("__AVR_ATmega328P__", "");
-        step.addIncludePath(b.path("../../libc/avr/include"));
-        step.addIncludePath(b.path("../../libc/avr/include/avr"));
+        step.addIncludePath(b.path("../../../libc/avr/include"));
+        step.addIncludePath(b.path("../../../libc/avr/include/avr"));
         mod = step.addModule(mod_name);
     }
 

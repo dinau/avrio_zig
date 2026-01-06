@@ -1,5 +1,6 @@
 all:
-	@zig build
+	@echo zig-$(shell zig version)
+	zig build
 
 clean:
 	@rm -f *.dmp *.s *.hex *.bin *.out *.elf *.o *.lst

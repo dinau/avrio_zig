@@ -4,7 +4,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const mod_name = "uart";
+    const mod_name = "uart_atmega328p";
 
     // -------
     // module
@@ -18,7 +18,6 @@ pub fn build(b: *std.Build) void {
     // import modules
     const modules = [_][]const u8{
         "atmega328p",
-        "xprintf_int",
     };
     for (modules) |module| {
         if (mod.import_table.get(module)) |_| {

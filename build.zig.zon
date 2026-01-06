@@ -5,19 +5,16 @@
     .minimum_zig_version = "0.15.2",
     .dependencies = .{
         .atmega328p = .{
-            .path = "src/libzig/atmega328p",
+            .path = "src/libzig/atmega328p/iop",
         },
         .delay = .{
             .path = "src/libzig/delay",
         },
-        .delay = .{
-            .path = "src/libzig/delay",
+        .uart_atmega328p = .{
+            .path = "src/libzig/atmega328p/uart",
         },
-        .uart = .{
-            .path = "src/libzig/uart",
-        },
-        .xprintf_int = .{
-            .path = "src/libzig/xprintf_int",
+        .xprintf= .{
+            .path = "src/libzig/xprintf",
         },
     },
     .paths = .{

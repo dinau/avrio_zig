@@ -2,7 +2,7 @@ const std = @import("std");
 
 pub fn build(b: *std.Build) !void {
     const main_file_name = "main";
-    const out_file_name = "led_blink_delay";
+    const out_file_name = "template";
 
     const cpu = std.Target.Query{
         .cpu_arch = .avr,

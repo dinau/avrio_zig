@@ -1,3 +1,4 @@
+*.html
 *.static
 *.elf
 *.hex
@@ -7,3 +8,5 @@ zig-out/
 build/
 build-*/
 docgen_tmp/
+examples/arduino_atmega328p/build.zig
+examples/arduino_atmega328p/build.zig.zon

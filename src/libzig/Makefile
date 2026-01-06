@@ -1,8 +1,8 @@
 DIRS = \
-	atmega328p \
-	delay      \
-	uart       \
-	xprintf_int
+	atmega328p/iop  \
+	atmega328p/uart \
+	delay           \
+	xprintf
 
 all:
 	$(foreach exdir,$(DIRS), $(call def_make,$(exdir),$@))
