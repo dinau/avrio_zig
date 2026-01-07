@@ -1,4 +1,5 @@
 const std = @import("std");
+const builtin = @import("builtin");
 
 pub fn build(b: *std.Build) !void {
     const main_file_name = "main";
@@ -88,7 +89,13 @@ pub fn build(b: *std.Build) !void {
         "-hdSC",
         elf_file,
     });
-    const lst_file = avr_objdump.captureStdOut();
+
+    // Check Zig version
+    const lst_file = if (builtin.zig_version.minor >= 16)
+        avr_objdump.captureStdOut(.{}) // Zig 0.16+
+    else
+        avr_objdump.captureStdOut(); // Zig 0.15.2
+
     avr_objdump.step.dependOn(&avr_gcc.step);
 
     // Install the listing file to zig-out/bin

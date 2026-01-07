@@ -13,7 +13,7 @@ const LED_BIT: u8 = io.BV(LED_PIN);
 // main
 // -----
 export fn main() noreturn {
-    uart.init(115200);
+    uart.init(115200); // Set baudrate
     c.xfunc_output = uart.putc; // Set putc for xprintf()
     io.DDRB.* |= LED_BIT;
 

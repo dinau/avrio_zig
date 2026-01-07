@@ -1,7 +1,7 @@
 .{
     .name = .led_blink_delay,
     .version = "0.0.1",
-    .fingerprint = 0xaed0e0db6d01d6b5 , // Changing this has security and trust implications.
+    .fingerprint = 0xaed0e0db6d01d6b5, // Changing this has security and trust implications.
     .minimum_zig_version = "0.15.2",
     .dependencies = .{
         .avrio_zig = .{
