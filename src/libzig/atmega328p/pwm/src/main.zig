@@ -55,12 +55,12 @@ pub const pwm = struct {
     }
 
     pub inline fn enable_period_intr() void {
-        //io.set_bit(io.TIFR1, io.TOV1);    // Setting is to be cleared.
-        io.set_bit(io.TIMSK1, io.TOIE1);
+        //io.setbit(io.TIFR1, io.TOV1);    // Setting is to be cleared.
+        io.setbit(io.TIMSK1, io.TOIE1);
     }
 
     pub inline fn disable_period_intr() void {
-        io.clr_bit(io.TIMSK1, io.TOIE1);
+        io.clrbit(io.TIMSK1, io.TOIE1);
     }
 
     pub inline fn init() void { // clear when match and FAST PWM TOP=ICR1

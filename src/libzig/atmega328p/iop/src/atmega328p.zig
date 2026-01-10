@@ -54,82 +54,26 @@ pub const __builtin_assume = @import("std").zig.c_builtins.__builtin_assume;
 pub const __builtin_unreachable = @import("std").zig.c_builtins.__builtin_unreachable;
 pub const __builtin_constant_p = @import("std").zig.c_builtins.__builtin_constant_p;
 pub const __builtin_mul_overflow = @import("std").zig.c_builtins.__builtin_mul_overflow;
-pub const __builtin_va_list = [*c]u8;
-pub const __gnuc_va_list = __builtin_va_list;
-pub const va_list = __gnuc_va_list;
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:610:3: warning: TODO implement translation of stmt class GCCAsmStmtClass
-
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:605:36: warning: unable to translate function, demoted to extern
-pub extern fn __debugbreak() void;
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:632:3: warning: TODO implement translation of stmt class GCCAsmStmtClass
-
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:626:60: warning: unable to translate function, demoted to extern
-pub extern fn __fastfail(arg_code: c_uint) noreturn;
-pub extern fn __mingw_get_crt_info() [*c]const u8;
-pub const rsize_t = usize;
-pub const ptrdiff_t = c_longlong;
-pub const wchar_t = c_ushort;
-pub const wint_t = c_ushort;
-pub const wctype_t = c_ushort;
-pub const errno_t = c_int;
-pub const __time32_t = c_long;
-pub const __time64_t = c_longlong;
-pub const time_t = __time64_t;
-pub const struct_threadlocaleinfostruct = extern struct {
-    _locale_pctype: [*c]const c_ushort = @import("std").mem.zeroes([*c]const c_ushort),
-    _locale_mb_cur_max: c_int = @import("std").mem.zeroes(c_int),
-    _locale_lc_codepage: c_uint = @import("std").mem.zeroes(c_uint),
-};
-pub const struct_threadmbcinfostruct = opaque {};
-pub const pthreadlocinfo = [*c]struct_threadlocaleinfostruct;
-pub const pthreadmbcinfo = ?*struct_threadmbcinfostruct;
-pub const struct___lc_time_data = opaque {};
-pub const struct_localeinfo_struct = extern struct {
-    locinfo: pthreadlocinfo = @import("std").mem.zeroes(pthreadlocinfo),
-    mbcinfo: pthreadmbcinfo = @import("std").mem.zeroes(pthreadmbcinfo),
-};
-pub const _locale_tstruct = struct_localeinfo_struct;
-pub const _locale_t = [*c]struct_localeinfo_struct;
-pub const struct_tagLC_ID = extern struct {
-    wLanguage: c_ushort = @import("std").mem.zeroes(c_ushort),
-    wCountry: c_ushort = @import("std").mem.zeroes(c_ushort),
-    wCodePage: c_ushort = @import("std").mem.zeroes(c_ushort),
-};
-pub const LC_ID = struct_tagLC_ID;
-pub const LPLC_ID = [*c]struct_tagLC_ID;
-pub const threadlocinfo = struct_threadlocaleinfostruct;
 pub const int_least8_t = i8;
 pub const uint_least8_t = u8;
-pub const int_least16_t = c_short;
-pub const uint_least16_t = c_ushort;
-pub const int_least32_t = c_int;
-pub const uint_least32_t = c_uint;
-pub const int_least64_t = c_longlong;
-pub const uint_least64_t = c_ulonglong;
+pub const int_least16_t = i16;
+pub const uint_least16_t = u16;
+pub const int_least32_t = i32;
+pub const uint_least32_t = u32;
+pub const int_least64_t = i64;
+pub const uint_least64_t = u64;
 pub const int_fast8_t = i8;
 pub const uint_fast8_t = u8;
-pub const int_fast16_t = c_short;
-pub const uint_fast16_t = c_ushort;
-pub const int_fast32_t = c_int;
-pub const uint_fast32_t = c_uint;
-pub const int_fast64_t = c_longlong;
-pub const uint_fast64_t = c_ulonglong;
-pub const intmax_t = c_longlong;
-pub const uintmax_t = c_ulonglong;
-pub const imaxdiv_t = extern struct {
-    quot: intmax_t = @import("std").mem.zeroes(intmax_t),
-    rem: intmax_t = @import("std").mem.zeroes(intmax_t),
-};
-pub fn imaxabs(arg_j: intmax_t) callconv(.c) intmax_t {
-    var j = arg_j;
-    _ = &j;
-    return if (j >= @as(intmax_t, @bitCast(@as(c_longlong, @as(c_int, 0))))) j else -j;
-}
-pub extern fn imaxdiv(numer: intmax_t, denom: intmax_t) imaxdiv_t;
-pub extern fn strtoimax(noalias nptr: [*c]const u8, noalias endptr: [*c][*c]u8, base: c_int) intmax_t;
-pub extern fn strtoumax(noalias nptr: [*c]const u8, noalias endptr: [*c][*c]u8, base: c_int) uintmax_t;
-pub extern fn wcstoimax(noalias nptr: [*c]const wchar_t, noalias endptr: [*c][*c]wchar_t, base: c_int) intmax_t;
-pub extern fn wcstoumax(noalias nptr: [*c]const wchar_t, noalias endptr: [*c][*c]wchar_t, base: c_int) uintmax_t;
+pub const int_fast16_t = i16;
+pub const uint_fast16_t = u16;
+pub const int_fast32_t = i32;
+pub const uint_fast32_t = u32;
+pub const int_fast64_t = i64;
+pub const uint_fast64_t = u64;
+pub const intmax_t = i64;
+pub const uintmax_t = u64;
+pub const int_farptr_t = i32;
+pub const uint_farptr_t = u32;
 pub const __fuse_t = extern struct {
     low: u8 = @import("std").mem.zeroes(u8),
     high: u8 = @import("std").mem.zeroes(u8),
@@ -179,7 +123,6 @@ pub const __CONSTANT_CFSTRINGS__ = @as(c_int, 1);
 pub const __SEH__ = @as(c_int, 1);
 pub const __clang_literal_encoding__ = "UTF-8";
 pub const __clang_wide_literal_encoding__ = "UTF-16";
-pub const __OPTIMIZE__ = @as(c_int, 1);
 pub const __ORDER_LITTLE_ENDIAN__ = @as(c_int, 1234);
 pub const __ORDER_BIG_ENDIAN__ = @as(c_int, 4321);
 pub const __ORDER_PDP_ENDIAN__ = @as(c_int, 3412);
@@ -230,7 +173,7 @@ pub const __INTMAX_TYPE__ = c_longlong;
 pub const __INTMAX_FMTd__ = "lld";
 pub const __INTMAX_FMTi__ = "lli";
 pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`");
-// (no file):96:9
+// (no file):95:9
 pub const __INTMAX_C = @import("std").zig.c_translation.Macros.LL_SUFFIX;
 pub const __UINTMAX_TYPE__ = c_ulonglong;
 pub const __UINTMAX_FMTo__ = "llo";
@@ -238,7 +181,7 @@ pub const __UINTMAX_FMTu__ = "llu";
 pub const __UINTMAX_FMTx__ = "llx";
 pub const __UINTMAX_FMTX__ = "llX";
 pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`");
-// (no file):103:9
+// (no file):102:9
 pub const __UINTMAX_C = @import("std").zig.c_translation.Macros.ULL_SUFFIX;
 pub const __PTRDIFF_TYPE__ = c_longlong;
 pub const __PTRDIFF_FMTd__ = "lld";
@@ -354,7 +297,7 @@ pub const __INT64_TYPE__ = c_longlong;
 pub const __INT64_FMTd__ = "lld";
 pub const __INT64_FMTi__ = "lli";
 pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `LL`");
-// (no file):209:9
+// (no file):208:9
 pub const __INT64_C = @import("std").zig.c_translation.Macros.LL_SUFFIX;
 pub const __UINT8_TYPE__ = u8;
 pub const __UINT8_FMTo__ = "hho";
@@ -386,7 +329,7 @@ pub const __UINT32_FMTu__ = "u";
 pub const __UINT32_FMTx__ = "x";
 pub const __UINT32_FMTX__ = "X";
 pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`");
-// (no file):234:9
+// (no file):233:9
 pub const __UINT32_C = @import("std").zig.c_translation.Macros.U_SUFFIX;
 pub const __UINT32_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_uint, 4294967295, .decimal);
 pub const __INT32_MAX__ = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
@@ -396,7 +339,7 @@ pub const __UINT64_FMTu__ = "llu";
 pub const __UINT64_FMTx__ = "llx";
 pub const __UINT64_FMTX__ = "llX";
 pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `ULL`");
-// (no file):243:9
+// (no file):242:9
 pub const __UINT64_C = @import("std").zig.c_translation.Macros.ULL_SUFFIX;
 pub const __UINT64_MAX__ = @as(c_ulonglong, 18446744073709551615);
 pub const __INT64_MAX__ = @as(c_longlong, 9223372036854775807);
@@ -514,10 +457,12 @@ pub const __GCC_ATOMIC_INT_LOCK_FREE = @as(c_int, 2);
 pub const __GCC_ATOMIC_LONG_LOCK_FREE = @as(c_int, 2);
 pub const __GCC_ATOMIC_LLONG_LOCK_FREE = @as(c_int, 2);
 pub const __GCC_ATOMIC_POINTER_LOCK_FREE = @as(c_int, 2);
+pub const __NO_INLINE__ = @as(c_int, 1);
 pub const __PIC__ = @as(c_int, 2);
 pub const __pic__ = @as(c_int, 2);
 pub const __FLT_RADIX__ = @as(c_int, 2);
 pub const __DECIMAL_DIG__ = __LDBL_DECIMAL_DIG__;
+pub const __SSP_STRONG__ = @as(c_int, 2);
 pub const __GCC_ASM_FLAG_OUTPUTS__ = @as(c_int, 1);
 pub const __code_model_small__ = @as(c_int, 1);
 pub const __amd64__ = @as(c_int, 1);
@@ -527,9 +472,9 @@ pub const __x86_64__ = @as(c_int, 1);
 pub const __SEG_GS = @as(c_int, 1);
 pub const __SEG_FS = @as(c_int, 1);
 pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `address_space`");
-// (no file):375:9
-pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`");
 // (no file):376:9
+pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`");
+// (no file):377:9
 pub const __corei7 = @as(c_int, 1);
 pub const __corei7__ = @as(c_int, 1);
 pub const __tune_corei7__ = @as(c_int, 1);
@@ -604,27 +549,27 @@ pub const __MINGW64__ = @as(c_int, 1);
 pub const __MSVCRT__ = @as(c_int, 1);
 pub const __MINGW32__ = @as(c_int, 1);
 pub const __declspec = @compileError("unable to translate C expr: unexpected token '__attribute__'");
-// (no file):450:9
-pub const _cdecl = @compileError("unable to translate macro: undefined identifier `__cdecl__`");
 // (no file):451:9
-pub const __cdecl = @compileError("unable to translate macro: undefined identifier `__cdecl__`");
+pub const _cdecl = @compileError("unable to translate macro: undefined identifier `__cdecl__`");
 // (no file):452:9
-pub const _stdcall = @compileError("unable to translate macro: undefined identifier `__stdcall__`");
+pub const __cdecl = @compileError("unable to translate macro: undefined identifier `__cdecl__`");
 // (no file):453:9
-pub const __stdcall = @compileError("unable to translate macro: undefined identifier `__stdcall__`");
+pub const _stdcall = @compileError("unable to translate macro: undefined identifier `__stdcall__`");
 // (no file):454:9
-pub const _fastcall = @compileError("unable to translate macro: undefined identifier `__fastcall__`");
+pub const __stdcall = @compileError("unable to translate macro: undefined identifier `__stdcall__`");
 // (no file):455:9
-pub const __fastcall = @compileError("unable to translate macro: undefined identifier `__fastcall__`");
+pub const _fastcall = @compileError("unable to translate macro: undefined identifier `__fastcall__`");
 // (no file):456:9
-pub const _thiscall = @compileError("unable to translate macro: undefined identifier `__thiscall__`");
+pub const __fastcall = @compileError("unable to translate macro: undefined identifier `__fastcall__`");
 // (no file):457:9
-pub const __thiscall = @compileError("unable to translate macro: undefined identifier `__thiscall__`");
+pub const _thiscall = @compileError("unable to translate macro: undefined identifier `__thiscall__`");
 // (no file):458:9
-pub const _pascal = @compileError("unable to translate macro: undefined identifier `__pascal__`");
+pub const __thiscall = @compileError("unable to translate macro: undefined identifier `__thiscall__`");
 // (no file):459:9
-pub const __pascal = @compileError("unable to translate macro: undefined identifier `__pascal__`");
+pub const _pascal = @compileError("unable to translate macro: undefined identifier `__pascal__`");
 // (no file):460:9
+pub const __pascal = @compileError("unable to translate macro: undefined identifier `__pascal__`");
+// (no file):461:9
 pub const __STDC__ = @as(c_int, 1);
 pub const __STDC_HOSTED__ = @as(c_int, 1);
 pub const __STDC_VERSION__ = @as(c_long, 201710);
@@ -633,610 +578,234 @@ pub const __STDC_UTF_32__ = @as(c_int, 1);
 pub const __STDC_EMBED_NOT_FOUND__ = @as(c_int, 0);
 pub const __STDC_EMBED_FOUND__ = @as(c_int, 1);
 pub const __STDC_EMBED_EMPTY__ = @as(c_int, 2);
-pub const NDEBUG = @as(c_int, 1);
 pub const __MSVCRT_VERSION__ = @as(c_int, 0xE00);
 pub const _WIN32_WINNT = @as(c_int, 0x0a00);
 pub const __AVR_ATmega328P__ = "";
 pub const _AVR_IO_H_ = "";
 pub const _AVR_SFR_DEFS_H_ = @as(c_int, 1);
 pub const _SFR_ASM_COMPAT = @as(c_int, 0);
-pub const __CLANG_INTTYPES_H = "";
-pub const _INTTYPES_H_ = "";
-pub const _INC_CRTDEFS = "";
-pub const _INC_CORECRT = "";
-pub const _INC__MINGW_H = "";
-pub const _INC_CRTDEFS_MACRO = "";
-pub const __MINGW64_PASTE2 = @compileError("unable to translate C expr: unexpected token '##'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:10:9
-pub inline fn __MINGW64_PASTE(x: anytype, y: anytype) @TypeOf(__MINGW64_PASTE2(x, y)) {
-    _ = &x;
-    _ = &y;
-    return __MINGW64_PASTE2(x, y);
+pub const __INTTYPES_H_ = "";
+pub const __STDINT_H_ = "";
+pub const __USING_MINT8 = @as(c_int, 0);
+pub const __CONCATenate = @compileError("unable to translate C expr: unexpected token '##'");
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/stdint.h:290:9
+pub inline fn __CONCAT(left: anytype, right: anytype) @TypeOf(__CONCATenate(left, right)) {
+    _ = &left;
+    _ = &right;
+    return __CONCATenate(left, right);
 }
-pub const __STRINGIFY = @compileError("unable to translate C expr: unexpected token '#'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:13:9
-pub inline fn __MINGW64_STRINGIFY(x: anytype) @TypeOf(__STRINGIFY(x)) {
-    _ = &x;
-    return __STRINGIFY(x);
-}
-pub const __MINGW64_VERSION_MAJOR = @as(c_int, 13);
-pub const __MINGW64_VERSION_MINOR = @as(c_int, 0);
-pub const __MINGW64_VERSION_BUGFIX = @as(c_int, 0);
-pub const __MINGW64_VERSION_RC = @as(c_int, 0);
-pub const __MINGW64_VERSION_STR = __MINGW64_STRINGIFY(__MINGW64_VERSION_MAJOR) ++ "." ++ __MINGW64_STRINGIFY(__MINGW64_VERSION_MINOR) ++ "." ++ __MINGW64_STRINGIFY(__MINGW64_VERSION_BUGFIX);
-pub const __MINGW64_VERSION_STATE = "alpha";
-pub const __MINGW32_MAJOR_VERSION = @as(c_int, 3);
-pub const __MINGW32_MINOR_VERSION = @as(c_int, 11);
-pub const _M_AMD64 = @as(c_int, 100);
-pub const _M_X64 = @as(c_int, 100);
-pub const @"_" = @as(c_int, 1);
-pub const __MINGW_USE_UNDERSCORE_PREFIX = @as(c_int, 0);
-pub const __MINGW_IMP_SYMBOL = @compileError("unable to translate macro: undefined identifier `__imp_`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:129:11
-pub const __MINGW_IMP_LSYMBOL = @compileError("unable to translate macro: undefined identifier `__imp_`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:130:11
-pub inline fn __MINGW_USYMBOL(sym: anytype) @TypeOf(sym) {
-    _ = &sym;
-    return sym;
-}
-pub inline fn __MINGW_LSYMBOL(sym: anytype) @TypeOf(__MINGW64_PASTE(@"_", sym)) {
-    _ = &sym;
-    return __MINGW64_PASTE(@"_", sym);
-}
-pub const __MINGW_ASM_CALL = @compileError("unable to translate C expr: unexpected token '__asm__'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:140:9
-pub const __MINGW_ASM_CRT_CALL = @compileError("unable to translate C expr: unexpected token '__asm__'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:141:9
-pub const __MINGW_EXTENSION = @compileError("unable to translate C expr: unexpected token '__extension__'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:173:13
-pub const __C89_NAMELESS = __MINGW_EXTENSION;
-pub const __C89_NAMELESSSTRUCTNAME = "";
-pub const __C89_NAMELESSSTRUCTNAME1 = "";
-pub const __C89_NAMELESSSTRUCTNAME2 = "";
-pub const __C89_NAMELESSSTRUCTNAME3 = "";
-pub const __C89_NAMELESSSTRUCTNAME4 = "";
-pub const __C89_NAMELESSSTRUCTNAME5 = "";
-pub const __C89_NAMELESSUNIONNAME = "";
-pub const __C89_NAMELESSUNIONNAME1 = "";
-pub const __C89_NAMELESSUNIONNAME2 = "";
-pub const __C89_NAMELESSUNIONNAME3 = "";
-pub const __C89_NAMELESSUNIONNAME4 = "";
-pub const __C89_NAMELESSUNIONNAME5 = "";
-pub const __C89_NAMELESSUNIONNAME6 = "";
-pub const __C89_NAMELESSUNIONNAME7 = "";
-pub const __C89_NAMELESSUNIONNAME8 = "";
-pub const __GNU_EXTENSION = __MINGW_EXTENSION;
-pub const __MINGW_HAVE_ANSI_C99_PRINTF = @as(c_int, 1);
-pub const __MINGW_HAVE_WIDE_C99_PRINTF = @as(c_int, 1);
-pub const __MINGW_HAVE_ANSI_C99_SCANF = @as(c_int, 1);
-pub const __MINGW_HAVE_WIDE_C99_SCANF = @as(c_int, 1);
-pub const __MINGW_POISON_NAME = @compileError("unable to translate macro: undefined identifier `_layout_has_not_been_verified_and_its_declaration_is_most_likely_incorrect`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:213:11
-pub const __MSABI_LONG = @import("std").zig.c_translation.Macros.L_SUFFIX;
-pub const __MINGW_GCC_VERSION = ((__GNUC__ * @as(c_int, 10000)) + (__GNUC_MINOR__ * @as(c_int, 100))) + __GNUC_PATCHLEVEL__;
-pub inline fn __MINGW_GNUC_PREREQ(major: anytype, minor: anytype) @TypeOf((__GNUC__ > major) or ((__GNUC__ == major) and (__GNUC_MINOR__ >= minor))) {
-    _ = &major;
-    _ = &minor;
-    return (__GNUC__ > major) or ((__GNUC__ == major) and (__GNUC_MINOR__ >= minor));
-}
-pub inline fn __MINGW_MSC_PREREQ(major: anytype, minor: anytype) @TypeOf(@as(c_int, 0)) {
-    _ = &major;
-    _ = &minor;
-    return @as(c_int, 0);
-}
-pub const __MINGW_ATTRIB_DEPRECATED_STR = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:257:11
-pub const __MINGW_SEC_WARN_STR = "This function or variable may be unsafe, use _CRT_SECURE_NO_WARNINGS to disable deprecation";
-pub const __MINGW_MSVC2005_DEPREC_STR = "This POSIX function is deprecated beginning in Visual C++ 2005, use _CRT_NONSTDC_NO_DEPRECATE to disable deprecation";
-pub const __MINGW_ATTRIB_DEPRECATED_MSVC2005 = __MINGW_ATTRIB_DEPRECATED_STR(__MINGW_MSVC2005_DEPREC_STR);
-pub const __MINGW_ATTRIB_DEPRECATED_SEC_WARN = __MINGW_ATTRIB_DEPRECATED_STR(__MINGW_SEC_WARN_STR);
-pub const __MINGW_MS_PRINTF = @compileError("unable to translate macro: undefined identifier `__format__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:281:9
-pub const __MINGW_MS_SCANF = @compileError("unable to translate macro: undefined identifier `__format__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:284:9
-pub const __MINGW_GNU_PRINTF = @compileError("unable to translate macro: undefined identifier `__format__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:287:9
-pub const __MINGW_GNU_SCANF = @compileError("unable to translate macro: undefined identifier `__format__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:290:9
-pub const __mingw_ovr = @compileError("unable to translate macro: undefined identifier `__unused__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:311:11
-pub const __mingw_attribute_artificial = @compileError("unable to translate macro: undefined identifier `__artificial__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:318:11
-pub const __MINGW_SELECTANY = @compileError("unable to translate macro: undefined identifier `__selectany__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_mac.h:324:9
-pub const __MINGW_FORTIFY_LEVEL = @as(c_int, 0);
-pub const __mingw_bos_ovr = __mingw_ovr;
-pub const __MINGW_FORTIFY_VA_ARG = @as(c_int, 0);
-pub const _INC_MINGW_SECAPI = "";
-pub const _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES = @as(c_int, 0);
-pub const _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES_MEMORY = @as(c_int, 0);
-pub const _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES = @as(c_int, 0);
-pub const _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT = @as(c_int, 0);
-pub const _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_MEMORY = @as(c_int, 0);
-pub const __MINGW_CRT_NAME_CONCAT2 = @compileError("unable to translate macro: undefined identifier `_s`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_secapi.h:41:9
-pub const __CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_MEMORY_0_3_ = @compileError("unable to translate C expr: unexpected token ';'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw_secapi.h:69:9
-pub const __LONG32 = c_long;
-pub const __MINGW_IMPORT = @compileError("unable to translate macro: undefined identifier `__dllimport__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:44:12
-pub const __USE_CRTIMP = @as(c_int, 1);
-pub const _CRTIMP = @compileError("unable to translate macro: undefined identifier `__dllimport__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:52:15
-pub const __DECLSPEC_SUPPORTED = "";
-pub const USE___UUIDOF = @as(c_int, 0);
-pub const _inline = @compileError("unable to translate C expr: unexpected token '__inline'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:74:9
-pub const __CRT_INLINE = @compileError("unable to translate macro: undefined identifier `__gnu_inline__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:83:11
-pub const __MINGW_INTRIN_INLINE = @compileError("unable to translate macro: undefined identifier `__always_inline__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:90:9
-pub const __MINGW_CXX11_CONSTEXPR = "";
-pub const __MINGW_CXX14_CONSTEXPR = "";
-pub const __UNUSED_PARAM = @compileError("unable to translate macro: undefined identifier `__unused__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:118:11
-pub const __restrict_arr = @compileError("unable to translate C expr: unexpected token '__restrict'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:133:10
-pub const __MINGW_ATTRIB_NORETURN = @compileError("unable to translate macro: undefined identifier `__noreturn__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:149:9
-pub const __MINGW_ATTRIB_CONST = @compileError("unable to translate C expr: unexpected token '__attribute__'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:150:9
-pub const __MINGW_ATTRIB_MALLOC = @compileError("unable to translate macro: undefined identifier `__malloc__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:160:9
-pub const __MINGW_ATTRIB_PURE = @compileError("unable to translate macro: undefined identifier `__pure__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:161:9
-pub const __MINGW_ATTRIB_NONNULL = @compileError("unable to translate macro: undefined identifier `__nonnull__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:174:9
-pub const __MINGW_ATTRIB_UNUSED = @compileError("unable to translate macro: undefined identifier `__unused__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:180:9
-pub const __MINGW_ATTRIB_USED = @compileError("unable to translate macro: undefined identifier `__used__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:186:9
-pub const __MINGW_ATTRIB_DEPRECATED = @compileError("unable to translate macro: undefined identifier `__deprecated__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:187:9
-pub const __MINGW_ATTRIB_DEPRECATED_MSG = @compileError("unable to translate macro: undefined identifier `__deprecated__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:189:9
-pub const __MINGW_NOTHROW = @compileError("unable to translate macro: undefined identifier `__nothrow__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:204:9
-pub const __MINGW_ATTRIB_NO_OPTIMIZE = "";
-pub const __MINGW_PRAGMA_PARAM = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:222:9
-pub const __MINGW_BROKEN_INTERFACE = @compileError("unable to translate macro: undefined identifier `message`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:225:9
-pub const _UCRT = "";
-pub inline fn __MINGW_UCRT_ASM_CALL(func: anytype) @TypeOf(__MINGW_ASM_CALL(func)) {
-    _ = &func;
-    return __MINGW_ASM_CALL(func);
-}
-pub const _INT128_DEFINED = "";
-pub const __int8 = u8;
-pub const __int16 = c_short;
-pub const __int32 = c_int;
-pub const __int64 = c_longlong;
-pub const __ptr32 = "";
-pub const __ptr64 = "";
-pub const __unaligned = "";
-pub const __w64 = "";
-pub const __forceinline = @compileError("unable to translate macro: undefined identifier `__always_inline__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:290:9
-pub const __nothrow = "";
-pub const _INC_VADEFS = "";
-pub const MINGW_SDK_INIT = "";
-pub const MINGW_HAS_SECURE_API = @as(c_int, 1);
-pub const __STDC_SECURE_LIB__ = @as(c_long, 200411);
-pub const __GOT_SECURE_LIB__ = __STDC_SECURE_LIB__;
-pub const MINGW_DDK_H = "";
-pub const MINGW_HAS_DDK_H = @as(c_int, 1);
-pub const _CRT_PACKING = @as(c_int, 8);
-pub const __GNUC_VA_LIST = "";
-pub const _VA_LIST_DEFINED = "";
-pub inline fn _ADDRESSOF(v: anytype) @TypeOf(&v) {
-    _ = &v;
-    return &v;
-}
-pub const _crt_va_start = @compileError("unable to translate macro: undefined identifier `__builtin_va_start`");
-// C:\zig\lib\libc\include\any-windows-any/vadefs.h:48:9
-pub const _crt_va_arg = @compileError("unable to translate C expr: unexpected token 'an identifier'");
-// C:\zig\lib\libc\include\any-windows-any/vadefs.h:49:9
-pub const _crt_va_end = @compileError("unable to translate macro: undefined identifier `__builtin_va_end`");
-// C:\zig\lib\libc\include\any-windows-any/vadefs.h:50:9
-pub const _crt_va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`");
-// C:\zig\lib\libc\include\any-windows-any/vadefs.h:51:9
-pub const __CRT_STRINGIZE = @compileError("unable to translate C expr: unexpected token '#'");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:309:9
-pub inline fn _CRT_STRINGIZE(_Value: anytype) @TypeOf(__CRT_STRINGIZE(_Value)) {
-    _ = &_Value;
-    return __CRT_STRINGIZE(_Value);
-}
-pub const __CRT_WIDE = @compileError("unable to translate macro: undefined identifier `L`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:314:9
-pub inline fn _CRT_WIDE(_String: anytype) @TypeOf(__CRT_WIDE(_String)) {
-    _ = &_String;
-    return __CRT_WIDE(_String);
-}
-pub const _W64 = "";
-pub const _CRTIMP_NOIA64 = _CRTIMP;
-pub const _CRTIMP2 = _CRTIMP;
-pub const _CRTIMP_ALTERNATIVE = _CRTIMP;
-pub const _CRT_ALTERNATIVE_IMPORTED = "";
-pub const _MRTIMP2 = _CRTIMP;
-pub const _DLL = "";
-pub const _MT = "";
-pub const _MCRTIMP = _CRTIMP;
-pub const _CRTIMP_PURE = _CRTIMP;
-pub const _PGLOBAL = "";
-pub const _AGLOBAL = "";
-pub const _SECURECRT_FILL_BUFFER_PATTERN = @as(c_int, 0xFD);
-pub const _CRT_DEPRECATE_TEXT = @compileError("unable to translate macro: undefined identifier `deprecated`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:373:9
-pub const _CRT_INSECURE_DEPRECATE_MEMORY = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:376:9
-pub const _CRT_INSECURE_DEPRECATE_GLOBALS = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:380:9
-pub const _CRT_MANAGED_HEAP_DEPRECATE = "";
-pub const _CRT_OBSOLETE = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:388:9
-pub const _CONST_RETURN = "";
-pub const UNALIGNED = "";
-pub const _CRT_ALIGN = @compileError("unable to translate macro: undefined identifier `__aligned__`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:415:9
-pub const __CRTDECL = __cdecl;
-pub const _ARGMAX = @as(c_int, 100);
-pub const _TRUNCATE = @import("std").zig.c_translation.cast(usize, -@as(c_int, 1));
-pub inline fn _CRT_UNUSED(x: anytype) anyopaque {
-    _ = &x;
-    return @import("std").zig.c_translation.cast(anyopaque, x);
-}
-pub const __USE_MINGW_ANSI_STDIO = @as(c_int, 0);
-pub const _CRT_glob = @compileError("unable to translate macro: undefined identifier `_dowildcard`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:479:9
-pub const __ANONYMOUS_DEFINED = "";
-pub const _ANONYMOUS_UNION = __MINGW_EXTENSION;
-pub const _ANONYMOUS_STRUCT = __MINGW_EXTENSION;
-pub const _UNION_NAME = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:499:9
-pub const _STRUCT_NAME = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:500:9
-pub const DUMMYUNIONNAME = "";
-pub const DUMMYUNIONNAME1 = "";
-pub const DUMMYUNIONNAME2 = "";
-pub const DUMMYUNIONNAME3 = "";
-pub const DUMMYUNIONNAME4 = "";
-pub const DUMMYUNIONNAME5 = "";
-pub const DUMMYUNIONNAME6 = "";
-pub const DUMMYUNIONNAME7 = "";
-pub const DUMMYUNIONNAME8 = "";
-pub const DUMMYUNIONNAME9 = "";
-pub const DUMMYSTRUCTNAME = "";
-pub const DUMMYSTRUCTNAME1 = "";
-pub const DUMMYSTRUCTNAME2 = "";
-pub const DUMMYSTRUCTNAME3 = "";
-pub const DUMMYSTRUCTNAME4 = "";
-pub const DUMMYSTRUCTNAME5 = "";
-pub const __CRT_UUID_DECL = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:587:9
-pub const __MINGW_DEBUGBREAK_IMPL = !(__has_builtin(__debugbreak) != 0);
-pub const __MINGW_FASTFAIL_IMPL = !(__has_builtin(__fastfail) != 0);
-pub const __MINGW_PREFETCH_IMPL = @compileError("unable to translate macro: undefined identifier `__prefetch`");
-// C:\zig\lib\libc\include\any-windows-any/_mingw.h:644:9
-pub const _CRTNOALIAS = "";
-pub const _CRTRESTRICT = "";
-pub const _SIZE_T_DEFINED = "";
-pub const _SSIZE_T_DEFINED = "";
-pub const _RSIZE_T_DEFINED = "";
-pub const _INTPTR_T_DEFINED = "";
-pub const __intptr_t_defined = "";
-pub const _UINTPTR_T_DEFINED = "";
-pub const __uintptr_t_defined = "";
-pub const _PTRDIFF_T_DEFINED = "";
-pub const _PTRDIFF_T_ = "";
-pub const _WCHAR_T_DEFINED = "";
-pub const _WCTYPE_T_DEFINED = "";
-pub const _WINT_T = "";
-pub const _ERRCODE_DEFINED = "";
-pub const _TIME32_T_DEFINED = "";
-pub const _TIME64_T_DEFINED = "";
-pub const _TIME_T_DEFINED = "";
-pub const _CRT_SECURE_CPP_NOTHROW = @compileError("unable to translate macro: undefined identifier `throw`");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:143:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_0 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:262:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_1 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:263:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_2 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:264:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_3 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:265:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_4 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:266:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_1_1 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:267:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_1_2 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:268:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_1_3 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:269:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_2_0 = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:270:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_1_ARGLIST = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:271:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_0_2_ARGLIST = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:272:9
-pub const __DEFINE_CPP_OVERLOAD_SECURE_FUNC_SPLITPATH = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:273:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_0 = @compileError("unable to translate macro: undefined identifier `__func_name`");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:277:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_1 = @compileError("unable to translate macro: undefined identifier `__func_name`");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:279:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_2 = @compileError("unable to translate macro: undefined identifier `__func_name`");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:281:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_3 = @compileError("unable to translate macro: undefined identifier `__func_name`");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:283:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_4 = @compileError("unable to translate macro: undefined identifier `__func_name`");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:285:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_0_EX = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:422:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_1_EX = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:423:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_2_EX = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:424:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_3_EX = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:425:9
-pub const __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_4_EX = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:426:9
-pub const _TAGLC_ID_DEFINED = "";
-pub const _THREADLOCALEINFO = "";
-pub const __crt_typefix = @compileError("unable to translate C expr: unexpected token ''");
-// C:\zig\lib\libc\include\any-windows-any/corecrt.h:486:9
-pub const _CRT_USE_WINAPI_FAMILY_DESKTOP_APP = "";
-pub const __CLANG_STDINT_H = "";
-pub const _STDINT_H = "";
-pub const __need_wint_t = "";
-pub const __need_wchar_t = "";
-pub const _WCHAR_T = "";
-pub const INT8_MIN = -@as(c_int, 128);
-pub const INT16_MIN = -@import("std").zig.c_translation.promoteIntLiteral(c_int, 32768, .decimal);
-pub const INT32_MIN = -@import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal) - @as(c_int, 1);
-pub const INT64_MIN = -@as(c_longlong, 9223372036854775807) - @as(c_int, 1);
-pub const INT8_MAX = @as(c_int, 127);
-pub const INT16_MAX = @as(c_int, 32767);
-pub const INT32_MAX = @import("std").zig.c_translation.promoteIntLiteral(c_int, 2147483647, .decimal);
-pub const INT64_MAX = @as(c_longlong, 9223372036854775807);
-pub const UINT8_MAX = @as(c_int, 255);
-pub const UINT16_MAX = @import("std").zig.c_translation.promoteIntLiteral(c_int, 65535, .decimal);
-pub const UINT32_MAX = @import("std").zig.c_translation.promoteIntLiteral(c_uint, 0xffffffff, .hex);
-pub const UINT64_MAX = @as(c_ulonglong, 0xffffffffffffffff);
-pub const INT_LEAST8_MIN = INT8_MIN;
-pub const INT_LEAST16_MIN = INT16_MIN;
-pub const INT_LEAST32_MIN = INT32_MIN;
-pub const INT_LEAST64_MIN = INT64_MIN;
+pub const INT8_MAX = @as(c_int, 0x7f);
+pub const INT8_MIN = -INT8_MAX - @as(c_int, 1);
+pub const UINT8_MAX = (INT8_MAX * @as(c_int, 2)) + @as(c_int, 1);
+pub const INT16_MAX = @as(c_int, 0x7fff);
+pub const INT16_MIN = -INT16_MAX - @as(c_int, 1);
+pub const UINT16_MAX = @compileError("unable to translate macro: undefined identifier `U`");
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/stdint.h:346:9
+pub const INT32_MAX = @as(c_long, 0x7fffffff);
+pub const INT32_MIN = -INT32_MAX - @as(c_long, 1);
+pub const UINT32_MAX = @compileError("unable to translate macro: undefined identifier `U`");
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/stdint.h:361:9
+pub const INT64_MAX = @as(c_longlong, 0x7fffffffffffffff);
+pub const INT64_MIN = -INT64_MAX - @as(c_longlong, 1);
+pub const UINT64_MAX = @compileError("unable to translate macro: undefined identifier `U`");
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/stdint.h:378:9
 pub const INT_LEAST8_MAX = INT8_MAX;
-pub const INT_LEAST16_MAX = INT16_MAX;
-pub const INT_LEAST32_MAX = INT32_MAX;
-pub const INT_LEAST64_MAX = INT64_MAX;
+pub const INT_LEAST8_MIN = INT8_MIN;
 pub const UINT_LEAST8_MAX = UINT8_MAX;
+pub const INT_LEAST16_MAX = INT16_MAX;
+pub const INT_LEAST16_MIN = INT16_MIN;
 pub const UINT_LEAST16_MAX = UINT16_MAX;
+pub const INT_LEAST32_MAX = INT32_MAX;
+pub const INT_LEAST32_MIN = INT32_MIN;
 pub const UINT_LEAST32_MAX = UINT32_MAX;
+pub const INT_LEAST64_MAX = INT64_MAX;
+pub const INT_LEAST64_MIN = INT64_MIN;
 pub const UINT_LEAST64_MAX = UINT64_MAX;
-pub const INT_FAST8_MIN = INT8_MIN;
-pub const INT_FAST16_MIN = INT16_MIN;
-pub const INT_FAST32_MIN = INT32_MIN;
-pub const INT_FAST64_MIN = INT64_MIN;
 pub const INT_FAST8_MAX = INT8_MAX;
-pub const INT_FAST16_MAX = INT16_MAX;
-pub const INT_FAST32_MAX = INT32_MAX;
-pub const INT_FAST64_MAX = INT64_MAX;
+pub const INT_FAST8_MIN = INT8_MIN;
 pub const UINT_FAST8_MAX = UINT8_MAX;
+pub const INT_FAST16_MAX = INT16_MAX;
+pub const INT_FAST16_MIN = INT16_MIN;
 pub const UINT_FAST16_MAX = UINT16_MAX;
+pub const INT_FAST32_MAX = INT32_MAX;
+pub const INT_FAST32_MIN = INT32_MIN;
 pub const UINT_FAST32_MAX = UINT32_MAX;
+pub const INT_FAST64_MAX = INT64_MAX;
+pub const INT_FAST64_MIN = INT64_MIN;
 pub const UINT_FAST64_MAX = UINT64_MAX;
-pub const INTPTR_MIN = INT64_MIN;
-pub const INTPTR_MAX = INT64_MAX;
-pub const UINTPTR_MAX = UINT64_MAX;
-pub const INTMAX_MIN = INT64_MIN;
+pub const INTPTR_MAX = INT16_MAX;
+pub const INTPTR_MIN = INT16_MIN;
+pub const UINTPTR_MAX = UINT16_MAX;
 pub const INTMAX_MAX = INT64_MAX;
+pub const INTMAX_MIN = INT64_MIN;
 pub const UINTMAX_MAX = UINT64_MAX;
-pub const PTRDIFF_MIN = INT64_MIN;
-pub const PTRDIFF_MAX = INT64_MAX;
-pub const SIG_ATOMIC_MIN = INT32_MIN;
-pub const SIG_ATOMIC_MAX = INT32_MAX;
-pub const SIZE_MAX = UINT64_MAX;
-pub const WCHAR_MIN = @as(c_uint, 0);
-pub const WCHAR_MAX = @as(c_uint, 0xffff);
-pub const WINT_MIN = @as(c_uint, 0);
-pub const WINT_MAX = @as(c_uint, 0xffff);
-pub inline fn INT8_C(val: anytype) @TypeOf((INT_LEAST8_MAX - INT_LEAST8_MAX) + val) {
-    _ = &val;
-    return (INT_LEAST8_MAX - INT_LEAST8_MAX) + val;
+pub const PTRDIFF_MAX = INT16_MAX;
+pub const PTRDIFF_MIN = INT16_MIN;
+pub const SIG_ATOMIC_MAX = INT8_MAX;
+pub const SIG_ATOMIC_MIN = INT8_MIN;
+pub const SIZE_MAX = UINT16_MAX;
+pub const WCHAR_MAX = __WCHAR_MAX__;
+pub const WCHAR_MIN = @compileError("unable to translate macro: undefined identifier `__WCHAR_MIN__`");
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/stdint.h:602:9
+pub const WINT_MAX = __WINT_MAX__;
+pub const WINT_MIN = @compileError("unable to translate macro: undefined identifier `__WINT_MIN__`");
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/stdint.h:606:9
+pub inline fn INT8_C(c: anytype) @TypeOf(__INT8_C(c)) {
+    _ = &c;
+    return __INT8_C(c);
 }
-pub inline fn INT16_C(val: anytype) @TypeOf((INT_LEAST16_MAX - INT_LEAST16_MAX) + val) {
-    _ = &val;
-    return (INT_LEAST16_MAX - INT_LEAST16_MAX) + val;
+pub inline fn INT16_C(c: anytype) @TypeOf(__INT16_C(c)) {
+    _ = &c;
+    return __INT16_C(c);
 }
-pub inline fn INT32_C(val: anytype) @TypeOf((INT_LEAST32_MAX - INT_LEAST32_MAX) + val) {
-    _ = &val;
-    return (INT_LEAST32_MAX - INT_LEAST32_MAX) + val;
+pub inline fn INT32_C(c: anytype) @TypeOf(__INT32_C(c)) {
+    _ = &c;
+    return __INT32_C(c);
 }
-pub const INT64_C = @import("std").zig.c_translation.Macros.LL_SUFFIX;
-pub inline fn UINT8_C(val: anytype) @TypeOf(val) {
-    _ = &val;
-    return val;
+pub inline fn INT64_C(c: anytype) @TypeOf(__INT64_C(c)) {
+    _ = &c;
+    return __INT64_C(c);
 }
-pub inline fn UINT16_C(val: anytype) @TypeOf(val) {
-    _ = &val;
-    return val;
+pub inline fn UINT8_C(c: anytype) @TypeOf(__UINT8_C(c)) {
+    _ = &c;
+    return __UINT8_C(c);
 }
-pub const UINT32_C = @import("std").zig.c_translation.Macros.U_SUFFIX;
-pub const UINT64_C = @import("std").zig.c_translation.Macros.ULL_SUFFIX;
-pub const INTMAX_C = @import("std").zig.c_translation.Macros.LL_SUFFIX;
-pub const UINTMAX_C = @import("std").zig.c_translation.Macros.ULL_SUFFIX;
-pub const PRId64 = "lld";
-pub const PRIi64 = "lli";
-pub const PRIo64 = "llo";
-pub const PRIu64 = "llu";
-pub const PRIx64 = "llx";
-pub const PRIX64 = "llX";
+pub inline fn UINT16_C(c: anytype) @TypeOf(__UINT16_C(c)) {
+    _ = &c;
+    return __UINT16_C(c);
+}
+pub inline fn UINT32_C(c: anytype) @TypeOf(__UINT32_C(c)) {
+    _ = &c;
+    return __UINT32_C(c);
+}
+pub inline fn UINT64_C(c: anytype) @TypeOf(__UINT64_C(c)) {
+    _ = &c;
+    return __UINT64_C(c);
+}
+pub inline fn INTMAX_C(c: anytype) @TypeOf(__INTMAX_C(c)) {
+    _ = &c;
+    return __INTMAX_C(c);
+}
+pub inline fn UINTMAX_C(c: anytype) @TypeOf(__UINTMAX_C(c)) {
+    _ = &c;
+    return __UINTMAX_C(c);
+}
 pub const PRId8 = "d";
-pub const PRId16 = "d";
-pub const PRId32 = "d";
 pub const PRIdLEAST8 = "d";
-pub const PRIdLEAST16 = "d";
-pub const PRIdLEAST32 = "d";
-pub const PRIdLEAST64 = PRId64;
 pub const PRIdFAST8 = "d";
-pub const PRIdFAST16 = "d";
-pub const PRIdFAST32 = "d";
-pub const PRIdFAST64 = PRId64;
-pub const PRIdMAX = PRId64;
 pub const PRIi8 = "i";
-pub const PRIi16 = "i";
-pub const PRIi32 = "i";
 pub const PRIiLEAST8 = "i";
-pub const PRIiLEAST16 = "i";
-pub const PRIiLEAST32 = "i";
-pub const PRIiLEAST64 = PRIi64;
 pub const PRIiFAST8 = "i";
+pub const PRId16 = "d";
+pub const PRIdLEAST16 = "d";
+pub const PRIdFAST16 = "d";
+pub const PRIi16 = "i";
+pub const PRIiLEAST16 = "i";
 pub const PRIiFAST16 = "i";
-pub const PRIiFAST32 = "i";
-pub const PRIiFAST64 = PRIi64;
-pub const PRIiMAX = PRIi64;
+pub const PRId32 = "ld";
+pub const PRIdLEAST32 = "ld";
+pub const PRIdFAST32 = "ld";
+pub const PRIi32 = "li";
+pub const PRIiLEAST32 = "li";
+pub const PRIiFAST32 = "li";
+pub const PRIdPTR = PRId16;
+pub const PRIiPTR = PRIi16;
 pub const PRIo8 = "o";
-pub const PRIo16 = "o";
-pub const PRIo32 = "o";
 pub const PRIoLEAST8 = "o";
-pub const PRIoLEAST16 = "o";
-pub const PRIoLEAST32 = "o";
-pub const PRIoLEAST64 = PRIo64;
 pub const PRIoFAST8 = "o";
-pub const PRIoFAST16 = "o";
-pub const PRIoFAST32 = "o";
-pub const PRIoFAST64 = PRIo64;
-pub const PRIoMAX = PRIo64;
 pub const PRIu8 = "u";
-pub const PRIu16 = "u";
-pub const PRIu32 = "u";
 pub const PRIuLEAST8 = "u";
-pub const PRIuLEAST16 = "u";
-pub const PRIuLEAST32 = "u";
-pub const PRIuLEAST64 = PRIu64;
 pub const PRIuFAST8 = "u";
-pub const PRIuFAST16 = "u";
-pub const PRIuFAST32 = "u";
-pub const PRIuFAST64 = PRIu64;
-pub const PRIuMAX = PRIu64;
 pub const PRIx8 = "x";
-pub const PRIx16 = "x";
-pub const PRIx32 = "x";
 pub const PRIxLEAST8 = "x";
-pub const PRIxLEAST16 = "x";
-pub const PRIxLEAST32 = "x";
-pub const PRIxLEAST64 = PRIx64;
 pub const PRIxFAST8 = "x";
-pub const PRIxFAST16 = "x";
-pub const PRIxFAST32 = "x";
-pub const PRIxFAST64 = PRIx64;
-pub const PRIxMAX = PRIx64;
 pub const PRIX8 = "X";
-pub const PRIX16 = "X";
-pub const PRIX32 = "X";
 pub const PRIXLEAST8 = "X";
-pub const PRIXLEAST16 = "X";
-pub const PRIXLEAST32 = "X";
-pub const PRIXLEAST64 = PRIX64;
 pub const PRIXFAST8 = "X";
+pub const PRIo16 = "o";
+pub const PRIoLEAST16 = "o";
+pub const PRIoFAST16 = "o";
+pub const PRIu16 = "u";
+pub const PRIuLEAST16 = "u";
+pub const PRIuFAST16 = "u";
+pub const PRIx16 = "x";
+pub const PRIxLEAST16 = "x";
+pub const PRIxFAST16 = "x";
+pub const PRIX16 = "X";
+pub const PRIXLEAST16 = "X";
 pub const PRIXFAST16 = "X";
-pub const PRIXFAST32 = "X";
-pub const PRIXFAST64 = PRIX64;
-pub const PRIXMAX = PRIX64;
-pub const SCNd16 = "hd";
-pub const SCNd32 = "d";
-pub const SCNd64 = PRId64;
-pub const SCNdLEAST16 = "hd";
-pub const SCNdLEAST32 = "d";
-pub const SCNdLEAST64 = PRId64;
-pub const SCNdFAST16 = "hd";
-pub const SCNdFAST32 = "d";
-pub const SCNdFAST64 = PRId64;
-pub const SCNdMAX = PRId64;
-pub const SCNi16 = "hi";
-pub const SCNi32 = "i";
-pub const SCNi64 = PRIi64;
-pub const SCNiLEAST16 = "hi";
-pub const SCNiLEAST32 = "i";
-pub const SCNiLEAST64 = PRIi64;
-pub const SCNiFAST16 = "hi";
-pub const SCNiFAST32 = "i";
-pub const SCNiFAST64 = PRIi64;
-pub const SCNiMAX = PRIi64;
-pub const SCNo16 = "ho";
-pub const SCNo32 = "o";
-pub const SCNo64 = PRIo64;
-pub const SCNoLEAST16 = "ho";
-pub const SCNoLEAST32 = "o";
-pub const SCNoLEAST64 = PRIo64;
-pub const SCNoFAST16 = "ho";
-pub const SCNoFAST32 = "o";
-pub const SCNoFAST64 = PRIo64;
-pub const SCNoMAX = PRIo64;
-pub const SCNx16 = "hx";
-pub const SCNx32 = "x";
-pub const SCNx64 = PRIx64;
-pub const SCNxLEAST16 = "hx";
-pub const SCNxLEAST32 = "x";
-pub const SCNxLEAST64 = PRIx64;
-pub const SCNxFAST16 = "hx";
-pub const SCNxFAST32 = "x";
-pub const SCNxFAST64 = PRIx64;
-pub const SCNxMAX = PRIx64;
-pub const SCNu16 = "hu";
-pub const SCNu32 = "u";
-pub const SCNu64 = PRIu64;
-pub const SCNuLEAST16 = "hu";
-pub const SCNuLEAST32 = "u";
-pub const SCNuLEAST64 = PRIu64;
-pub const SCNuFAST16 = "hu";
-pub const SCNuFAST32 = "u";
-pub const SCNuFAST64 = PRIu64;
-pub const SCNuMAX = PRIu64;
-pub const PRIdPTR = PRId64;
-pub const PRIiPTR = PRIi64;
-pub const PRIoPTR = PRIo64;
-pub const PRIuPTR = PRIu64;
-pub const PRIxPTR = PRIx64;
-pub const PRIXPTR = PRIX64;
-pub const SCNdPTR = PRId64;
-pub const SCNiPTR = PRIi64;
-pub const SCNoPTR = PRIo64;
-pub const SCNxPTR = PRIx64;
-pub const SCNuPTR = PRIu64;
+pub const PRIo32 = "lo";
+pub const PRIoLEAST32 = "lo";
+pub const PRIoFAST32 = "lo";
+pub const PRIu32 = "lu";
+pub const PRIuLEAST32 = "lu";
+pub const PRIuFAST32 = "lu";
+pub const PRIx32 = "lx";
+pub const PRIxLEAST32 = "lx";
+pub const PRIxFAST32 = "lx";
+pub const PRIX32 = "lX";
+pub const PRIXLEAST32 = "lX";
+pub const PRIXFAST32 = "lX";
+pub const PRIoPTR = PRIo16;
+pub const PRIuPTR = PRIu16;
+pub const PRIxPTR = PRIx16;
+pub const PRIXPTR = PRIX16;
 pub const SCNd8 = "hhd";
 pub const SCNdLEAST8 = "hhd";
 pub const SCNdFAST8 = "hhd";
 pub const SCNi8 = "hhi";
 pub const SCNiLEAST8 = "hhi";
 pub const SCNiFAST8 = "hhi";
+pub const SCNd16 = "d";
+pub const SCNdLEAST16 = "d";
+pub const SCNdFAST16 = "d";
+pub const SCNi16 = "i";
+pub const SCNiLEAST16 = "i";
+pub const SCNiFAST16 = "i";
+pub const SCNd32 = "ld";
+pub const SCNdLEAST32 = "ld";
+pub const SCNdFAST32 = "ld";
+pub const SCNi32 = "li";
+pub const SCNiLEAST32 = "li";
+pub const SCNiFAST32 = "li";
+pub const SCNdPTR = SCNd16;
+pub const SCNiPTR = SCNi16;
 pub const SCNo8 = "hho";
 pub const SCNoLEAST8 = "hho";
 pub const SCNoFAST8 = "hho";
-pub const SCNx8 = "hhx";
-pub const SCNxLEAST8 = "hhx";
-pub const SCNxFAST8 = "hhx";
 pub const SCNu8 = "hhu";
 pub const SCNuLEAST8 = "hhu";
 pub const SCNuFAST8 = "hhu";
-//pub const _MMIO_BYTE = @compileError("unable to translate C expr: unexpected token 'volatile'");
-pub fn _MMIO_BYTE(adr: c_uint) *volatile u8 {
-    return @ptrFromInt(adr);
-}
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/sfr_defs.h:128:9
-//pub const _MMIO_WORD = @compileError("unable to translate C expr: unexpected token 'volatile'");
-pub fn _MMIO_WORD(adr: c_uint) *volatile u16 {
-    return @ptrFromInt(adr);
-}
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/sfr_defs.h:129:9
-//pub const _MMIO_DWORD = @compileError("unable to translate C expr: unexpected token 'volatile'");
-pub fn _MMIO_DWORD(adr: c_uint) *volatile u32 {
-    return @ptrFromInt(adr);
-}
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/sfr_defs.h:130:9
+pub const SCNx8 = "hhx";
+pub const SCNxLEAST8 = "hhx";
+pub const SCNxFAST8 = "hhx";
+pub const SCNo16 = "o";
+pub const SCNoLEAST16 = "o";
+pub const SCNoFAST16 = "o";
+pub const SCNu16 = "u";
+pub const SCNuLEAST16 = "u";
+pub const SCNuFAST16 = "u";
+pub const SCNx16 = "x";
+pub const SCNxLEAST16 = "x";
+pub const SCNxFAST16 = "x";
+pub const SCNo32 = "lo";
+pub const SCNoLEAST32 = "lo";
+pub const SCNoFAST32 = "lo";
+pub const SCNu32 = "lu";
+pub const SCNuLEAST32 = "lu";
+pub const SCNuFAST32 = "lu";
+pub const SCNx32 = "lx";
+pub const SCNxLEAST32 = "lx";
+pub const SCNxFAST32 = "lx";
+pub const SCNoPTR = SCNo16;
+pub const SCNuPTR = SCNu16;
+pub const SCNxPTR = SCNx16;
+pub fn _MMIO_BYTE(adr: c_uint) *volatile u8 { return @ptrFromInt(adr); }
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:128:9
+pub fn _MMIO_WORD(adr: c_uint) *volatile u16 { return @ptrFromInt(adr); }
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:129:9
+pub fn _MMIO_DWORD(adr: c_uint) *volatile u32 { return @ptrFromInt(adr); }
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:130:9
 pub const __SFR_OFFSET = @as(c_int, 0x20);
 pub inline fn _SFR_MEM8(mem_addr: anytype) @TypeOf(_MMIO_BYTE(mem_addr)) {
     _ = &mem_addr;
@@ -1291,7 +860,7 @@ pub inline fn _BV(bit: anytype) @TypeOf(@as(c_int, 1) << bit) {
     return @as(c_int, 1) << bit;
 }
 pub const _VECTOR = @compileError("unable to translate macro: undefined identifier `__vector_`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/sfr_defs.h:213:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:213:9
 pub inline fn bit_is_set(sfr: anytype, bit: anytype) @TypeOf(_SFR_BYTE(sfr) & _BV(bit)) {
     _ = &sfr;
     _ = &bit;
@@ -1303,9 +872,9 @@ pub inline fn bit_is_clear(sfr: anytype, bit: anytype) @TypeOf(!((_SFR_BYTE(sfr)
     return !((_SFR_BYTE(sfr) & _BV(bit)) != 0);
 }
 pub const loop_until_bit_is_set = @compileError("unable to translate C expr: unexpected token 'do'");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/sfr_defs.h:254:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:254:9
 pub const loop_until_bit_is_clear = @compileError("unable to translate C expr: unexpected token 'do'");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/sfr_defs.h:263:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:263:9
 pub const _AVR_IOXXX_H_ = "iom328p.h";
 pub const _AVR_IOM328P_H_ = @as(c_int, 1);
 pub const PINB = _SFR_IO8(@as(c_int, 0x03));
@@ -1448,7 +1017,7 @@ pub const EEARH = _SFR_IO8(@as(c_int, 0x22));
 pub const EEAR8 = @as(c_int, 0);
 pub const EEAR9 = @as(c_int, 1);
 pub const _EEPROM_REG_LOCATIONS_ = @compileError("invalid number suffix: 'F2021'");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/iom328p.h:214:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/iom328p.h:214:9
 pub const GTCCR = _SFR_IO8(@as(c_int, 0x23));
 pub const PSRSYNC = @as(c_int, 0);
 pub const PSRASY = @as(c_int, 1);
@@ -2104,17 +1673,17 @@ pub const SREG_H = @as(c_int, 5);
 pub const SREG_T = @as(c_int, 6);
 pub const SREG_I = @as(c_int, 7);
 pub const XL = @compileError("unable to translate macro: undefined identifier `r26`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/common.h:215:11
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/common.h:215:11
 pub const XH = @compileError("unable to translate macro: undefined identifier `r27`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/common.h:216:11
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/common.h:216:11
 pub const YL = @compileError("unable to translate macro: undefined identifier `r28`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/common.h:217:11
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/common.h:217:11
 pub const YH = @compileError("unable to translate macro: undefined identifier `r29`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/common.h:218:11
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/common.h:218:11
 pub const ZL = @compileError("unable to translate macro: undefined identifier `r30`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/common.h:220:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/common.h:220:9
 pub const ZH = @compileError("unable to translate macro: undefined identifier `r31`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/common.h:221:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/common.h:221:9
 pub const AVR_STATUS_REG = SREG;
 pub const AVR_STATUS_ADDR = _SFR_IO_ADDR(SREG);
 pub const AVR_STACK_POINTER_REG = SP;
@@ -2134,14 +1703,14 @@ pub const __AVR_LIBC_MINOR__ = @as(c_int, 0);
 pub const __AVR_LIBC_REVISION__ = @as(c_int, 0);
 pub const _AVR_FUSE_H_ = @as(c_int, 1);
 pub const FUSEMEM = @compileError("unable to translate macro: undefined identifier `__used__`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/fuse.h:226:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/fuse.h:226:9
 pub const FUSES = @compileError("unable to translate macro: undefined identifier `__fuse`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/fuse.h:267:13
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/fuse.h:267:13
 pub const _AVR_LOCK_H_ = @as(c_int, 1);
 pub const LOCKMEM = @compileError("unable to translate macro: undefined identifier `__used__`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/lock.h:190:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/lock.h:190:9
 pub const LOCKBITS = @compileError("unable to translate macro: undefined identifier `__lock`");
-// C:\zig-data\avr\avrio_zig\src\libzig\atmega328p\..\..\libc/avr/lock.h:194:9
+// C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/lock.h:194:9
 pub const LB_MODE_1 = @as(c_int, 0xFF);
 pub const LB_MODE_2 = @as(c_int, 0xFE);
 pub const LB_MODE_3 = @as(c_int, 0xFC);
@@ -2154,21 +1723,16 @@ pub const BLB1_MODE_2 = @as(c_int, 0xEF);
 pub const BLB1_MODE_3 = @as(c_int, 0xCF);
 pub const BLB1_MODE_4 = @as(c_int, 0xDF);
 pub const LOCKBITS_DEFAULT = @as(c_int, 0xFF);
-pub const threadlocaleinfostruct = struct_threadlocaleinfostruct;
-pub const threadmbcinfostruct = struct_threadmbcinfostruct;
-pub const __lc_time_data = struct___lc_time_data;
-pub const localeinfo_struct = struct_localeinfo_struct;
-pub const tagLC_ID = struct_tagLC_ID;
 
 // Added by hand
 pub inline fn BV(comptime bit: c_int) c_int {
     return 1 << bit;
 }
 
-pub fn clr_bit(reg: *volatile u8, comptime bit_no: c_int) void {
+pub fn clrbit(reg: *volatile u8, comptime bit_no: c_int) void {
     reg.* &= ~@as(u8, BV(bit_no));
 }
 
-pub fn set_bit(reg: *volatile u8, comptime bit_no: c_int) void {
+pub fn setbit(reg: *volatile u8, comptime bit_no: c_int) void {
     reg.* |= @as(u8, BV(bit_no));
 }

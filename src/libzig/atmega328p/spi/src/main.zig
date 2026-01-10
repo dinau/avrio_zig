@@ -49,13 +49,13 @@ pub const spi = struct {
     }
 
     pub inline fn cs_on() void { // Set to high
-        io.set_bit(io.PORTD, io.PORTD4);
-        io.set_bit(io.PORTB, io.PORTB0);
+        io.setbit(io.PORTD, io.PORTD4);
+        io.setbit(io.PORTB, io.PORTB0);
     }
 
     pub inline fn cs_off() void { // Set to low
-        io.clr_bit(io.PORTD, io.PORTD4);
-        io.clr_bit(io.PORTB, io.PORTB0);
+        io.clrbit(io.PORTD, io.PORTD4);
+        io.clrbit(io.PORTB, io.PORTB0);
         }
 
     pub fn sd_spi_enable() void {
@@ -71,12 +71,12 @@ pub const spi = struct {
     }
 
     pub fn sd_low_speed() void { // set F_CPU / 64 = 16MHz / 64 = 250KHz
-        io.setBit(io.SPCR, io.SPR0);
-        io.setBit(io.SPCR, io.SPR1);
+        io.setbit(io.SPCR, io.SPR0);
+        io.setbit(io.SPCR, io.SPR1);
     }
 
     pub fn sd_hi_speed() void { // set F_CPU / 2 = 16MHz / 2 = 8MHz
-        io.clrBit(io.SPCR, io.SPR0);
-        io.clrBit(io.SPCR, io.SPR1);
+        io.clrbit(io.SPCR, io.SPR0);
+        io.clrbit(io.SPCR, io.SPR1);
     }
 };

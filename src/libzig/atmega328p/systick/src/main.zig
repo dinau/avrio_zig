@@ -24,7 +24,7 @@ pub const systick = struct {
 
     pub fn init() void {
         io.TCCR0B.* = io.BV(io.CS02); //         clk / 256
-        io.set_bit(io.TIFR0, io.TOV0); //        Note: Setting TOV0=1 by software is equal to clear TOV0 flag.
+        io.setbit(io.TIFR0, io.TOV0); //        Note: Setting TOV0=1 by software is equal to clear TOV0 flag.
         io.TIMSK0.* = io.BV(io.TOIE0);
         io.TCNT0.* = (255 - INTERVAL_1MSEC); //  1msec
     }
