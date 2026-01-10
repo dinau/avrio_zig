@@ -11,6 +11,6 @@ export fn main() noreturn {
     io.DDRB.* |= LED_BIT;
     while (true) {
         io.PORTB.* ^= LED_BIT;
-        util.delay_msec(2000); // Dumb delay
+        util.delay_msec(2000);
     }
 }

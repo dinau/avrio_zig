@@ -3,6 +3,7 @@
 EXAMPLE_DIRS := \
 							examples/arduino_atmega328p/led_blink_delay      \
 							examples/arduino_atmega328p/led_blink_timer_intr \
+							examples/arduino_atmega328p/pwm_timer_spi_uart   \
 							examples/arduino_atmega328p/uart_xprintf
 
 all:
@@ -29,7 +30,10 @@ define def_make
 
 endef
 
-MAKEFLAGS += --no-print-directory
-
 fmt:
 	$(foreach exdir,$(EXAMPLE_DIRS), $(call def_make,$(exdir),$@ ))
+	$(MAKE) -C src/libzig $@
+
+
+
+MAKEFLAGS += --no-print-directory

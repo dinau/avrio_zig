@@ -1,0 +1,16 @@
+.{
+    .name = .systick_atmega328p,
+    .version = "0.0.1",
+    .fingerprint = 0x2a0fb226eee9f71b, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .atmega328p = .{
+            .path = "../iop",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

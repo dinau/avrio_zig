@@ -14,7 +14,7 @@ pub fn init(baud: u32) void {
     io.UBRR0L.* = @intCast(baudFactor);
     //
     io.UCSR0B.* = io.BV(io.RXEN0) | io.BV(io.TXEN0); // enable TX,RX
-                                                     // 8bit, np, stb1
+    // 8bit, np, stb1
     io.UCSR0C.* = (3 << io.UCSZ00) | (0 << io.USBS0) | (0 << io.UPM00);
 }
 

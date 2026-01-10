@@ -17,7 +17,7 @@ pub fn build(b: *std.Build) void {
     });
     step.addIncludePath(b.path("../../libc/xprintf"));
     step.addIncludePath(b.path("../../libc/avr/include"));
-   // step.defineCMacro("XF_USE_FP","1");
+    // step.defineCMacro("XF_USE_FP","1");
     const mod = step.addModule(mod_name);
     //mod.addCMacro("XF_USE_FP","1");
     mod.addCSourceFiles(.{

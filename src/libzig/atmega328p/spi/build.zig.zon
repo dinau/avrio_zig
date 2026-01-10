@@ -1,0 +1,16 @@
+.{
+    .name = .spi_atmega328p,
+    .version = "0.0.1",
+    .fingerprint = 0x91be0d70183dc2da, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .atmega328p = .{
+            .path = "../iop",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

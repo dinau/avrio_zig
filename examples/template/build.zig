@@ -41,8 +41,6 @@ pub fn build(b: *std.Build) !void {
     const obj_file = obj.getEmittedBin();
     const elf_file_name = b.fmt("{s}.elf", .{out_file_name});
     const hex_file_name = b.fmt("{s}.hex", .{out_file_name});
-    const lst_file_name = b.fmt("{s}.lst", .{out_file_name});
-
     const cache_dir = b.cache_root.path orelse ".zig-cache";
     const elf_file = b.pathJoin(&.{ cache_dir, elf_file_name });
     const hex_file = b.pathJoin(&.{ cache_dir, hex_file_name });
@@ -57,6 +55,8 @@ pub fn build(b: *std.Build) !void {
         "-ffunction-sections",
         "-fdata-sections",
         "-flto",
+        "-fno-builtin-isnan", // TODO
+        "-fno-builtin-isinf", // TODO
         "-o",
         elf_file,
     });
@@ -82,20 +82,6 @@ pub fn build(b: *std.Build) !void {
     // Install HEX file to zig-out/bin
     const install_hex = b.addInstallBinFile(.{ .cwd_relative = hex_file }, hex_file_name);
     install_hex.step.dependOn(&avr_objcopy.step);
-
-    // Generate disassembly listing
-    const avr_objdump = b.addSystemCommand(&.{
-        "avr-objdump",
-        "-hdSC",
-        elf_file,
-    });
-    const lst_file = avr_objdump.captureStdOut();
-    avr_objdump.step.dependOn(&avr_gcc.step);
-
-    // Install the listing file to zig-out/bin
-    const install_lst = b.addInstallFileWithDir(lst_file, .bin, lst_file_name);
-    install_lst.step.dependOn(&avr_objdump.step);
-
     // Display size information
     const avr_size = b.addSystemCommand(&.{
         "avr-size",
@@ -106,6 +92,5 @@ pub fn build(b: *std.Build) !void {
     // Add all steps to default build
     b.default_step.dependOn(&install_elf.step);
     b.default_step.dependOn(&install_hex.step);
-    b.default_step.dependOn(&install_lst.step);
     b.default_step.dependOn(&avr_size.step);
 }

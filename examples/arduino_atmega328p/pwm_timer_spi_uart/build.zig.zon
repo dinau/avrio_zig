@@ -1,0 +1,16 @@
+.{
+    .name = .pwm_timer_spi_uart,
+    .version = "0.0.1",
+    .fingerprint = 0xb6597e02bda0d57b, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .avrio_zig = .{
+            .path = "../../../",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

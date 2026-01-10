@@ -1,6 +1,9 @@
 DIRS = \
 	atmega328p/iop  \
 	atmega328p/uart \
+	atmega328p/pwm  \
+	atmega328p/spi  \
+	atmega328p/systick  \
 	delay           \
 	xprintf
 

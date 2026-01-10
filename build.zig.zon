@@ -10,6 +10,15 @@
         .delay = .{
             .path = "src/libzig/delay",
         },
+        .pwm_atmega328p = .{
+            .path = "src/libzig/atmega328p/pwm",
+        },
+        .spi_atmega328p = .{
+            .path = "src/libzig/atmega328p/spi",
+        },
+        .systick_atmega328p = .{
+            .path = "src/libzig/atmega328p/systick",
+        },
         .uart_atmega328p = .{
             .path = "src/libzig/atmega328p/uart",
         },
