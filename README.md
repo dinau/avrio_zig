@@ -56,6 +56,8 @@ Go to your work folder,
    zig init
    
    zig fetch --save git+https://github.com/dinau/avrio_zig
+
+   info: resolved to commit 9db022ad93b79fc44a3f3cdbbf3aa98f1e6aa62b
    ```
 
 1. Copy template fiie  
@@ -118,7 +120,6 @@ First comfirm avr-gcc version,
    myapp
    |-- build.zig
    |-- build.zig.zon
-   `-- template.lst         <== Assembler listing file
    |-- src
    |   |-- main.zig  
    |   `-- root.zig         // Not used
@@ -166,7 +167,7 @@ Build,
 pwd
 led_blink_delay
 
-zig build
+zig build  # or make
    text    data     bss     dec     hex filename
     260       0       0     260     104 .zig-cache\led_blink_delay.elf
 ```
@@ -225,7 +226,7 @@ Build,
 pwd
 led_blink_timer_intr
 
-$ zig build
+$ zig build  # or make
     text    data     bss     dec     hex filename
      210       0       0     210      d2 .zig-cache\led_blink_timer_intr.elf
 ```
@@ -268,7 +269,7 @@ Build,
 pwd
 uart_xprintf
 
-$ zig build
+$ zig build  # or make
     text    data     bss     dec     hex filename
     4976      40       4    5020    139c .zig-cache\uart_xprintf.elf
 ```
@@ -314,7 +315,7 @@ Build,
 pwd
 pwm_timer_spi_uart
 
-$ zig build
+$ zig build  # or make
     text    data     bss     dec     hex filename
     5198      50      14    5262    148e .zig-cache\pwm_timer_spi_uart.elf
 ```
