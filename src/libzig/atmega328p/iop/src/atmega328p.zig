@@ -800,11 +800,17 @@ pub const SCNxFAST32 = "lx";
 pub const SCNoPTR = SCNo16;
 pub const SCNuPTR = SCNu16;
 pub const SCNxPTR = SCNx16;
-pub fn _MMIO_BYTE(adr: c_uint) *volatile u8 { return @ptrFromInt(adr); }
+pub fn _MMIO_BYTE(adr: c_uint) *volatile u8 {
+    return @ptrFromInt(adr);
+}
 // C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:128:9
-pub fn _MMIO_WORD(adr: c_uint) *volatile u16 { return @ptrFromInt(adr); }
+pub fn _MMIO_WORD(adr: c_uint) *volatile u16 {
+    return @ptrFromInt(adr);
+}
 // C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:129:9
-pub fn _MMIO_DWORD(adr: c_uint) *volatile u32 { return @ptrFromInt(adr); }
+pub fn _MMIO_DWORD(adr: c_uint) *volatile u32 {
+    return @ptrFromInt(adr);
+}
 // C:\avrio_zig\src\libzig\atmega328p\iop\..\..\..\libc\avr\include/avr/sfr_defs.h:130:9
 pub const __SFR_OFFSET = @as(c_int, 0x20);
 pub inline fn _SFR_MEM8(mem_addr: anytype) @TypeOf(_MMIO_BYTE(mem_addr)) {
@@ -1725,14 +1731,26 @@ pub const BLB1_MODE_4 = @as(c_int, 0xDF);
 pub const LOCKBITS_DEFAULT = @as(c_int, 0xFF);
 
 // Added by hand
-pub inline fn BV(comptime bit: c_int) c_int {
-    return 1 << bit;
+pub inline fn BV(bit: c_int) u8 {
+    return @as(u8, 1) << @intCast(bit);
 }
 
-pub fn clrbit(reg: *volatile u8, comptime bit_no: c_int) void {
-    reg.* &= ~@as(u8, BV(bit_no));
+pub inline fn BV16(bit: c_int) u16 {
+    return @as(u16, 1) << @intCast(bit);
 }
 
-pub fn setbit(reg: *volatile u8, comptime bit_no: c_int) void {
-    reg.* |= @as(u8, BV(bit_no));
+pub fn clrbit(reg: anytype, bit_no: c_int) void {
+    switch (@TypeOf(reg)) {
+        *volatile u8 => reg.* &= ~@as(u8, BV(bit_no)),
+        *volatile u16 => reg.* &= ~@as(u16, BV16(bit_no)),
+        else => @compileError("Unkonwn Type: [reg]"),
+    }
+}
+
+pub fn setbit(reg: anytype, bit_no: c_int) void {
+    switch (@TypeOf(reg)) {
+        *volatile u8 => reg.* |= @as(u8, BV(bit_no)),
+        *volatile u16 => reg.* |= @as(u16, BV16(bit_no)),
+        else => @compileError("Unkonwn Type: [reg]"),
+    }
 }

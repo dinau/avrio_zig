@@ -10,16 +10,28 @@
 bitOp = <<EOS
 
 // Added by hand
-pub inline fn BV(comptime bit: c_int) c_int {
-    return 1 << bit;
+pub inline fn BV(bit: c_int) u8 {
+    return @as(u8,1) << @intCast(bit);
 }
 
-pub fn clrbit(reg: *volatile u8, comptime bit_no: c_int) void {
-    reg.* &= ~@as(u8, BV(bit_no));
+pub inline fn BV16(bit: c_int) u16 {
+    return @as(u16,1) << @intCast(bit);
 }
 
-pub fn setbit(reg: *volatile u8, comptime bit_no: c_int) void {
-    reg.* |= @as(u8, BV(bit_no));
+pub fn clrbit(reg: anytype, bit_no: c_int) void {
+    switch(@TypeOf(reg)){
+        *volatile u8  => reg.* &= ~@as(u8,  BV(bit_no)),
+        *volatile u16 => reg.* &= ~@as(u16, BV16(bit_no)),
+        else => @compileError("Unkonwn Type: [reg]"),
+    }
+}
+
+pub fn setbit(reg: anytype, bit_no: c_int) void {
+    switch(@TypeOf(reg)){
+        *volatile u8 =>  reg.* |= @as(u8,  BV(bit_no)),
+        *volatile u16 => reg.* |= @as(u16, BV16(bit_no)),
+        else => @compileError("Unkonwn Type: [reg]"),
+    }
 }
 EOS
 

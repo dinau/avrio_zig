@@ -59,10 +59,16 @@ pub const systick = struct {
     }
 
     pub fn set_user_ticks_u16(ticks: u16) void {
-        asm volatile("cli");
+        const sreg = asm volatile ("in %[res], 0x3F"
+            : [res] "=r" (-> u8),
+        ); // Star atomic access
+        asm volatile ("cli");
         pwuser_ticks.* = ticks;
         pwuser_ticks_reload.* = ticks;
-        asm volatile("sei");
+        asm volatile ("out 0x3F, %[src]"
+            :
+            : [src] "r" (sreg),
+        );
     }
 
     pub fn is_user_ticks_trigger() bool {

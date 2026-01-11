@@ -56,7 +56,7 @@ pub const spi = struct {
     pub inline fn cs_off() void { // Set to low
         io.clrbit(io.PORTD, io.PORTD4);
         io.clrbit(io.PORTB, io.PORTB0);
-        }
+    }
 
     pub fn sd_spi_enable() void {
         // NOP

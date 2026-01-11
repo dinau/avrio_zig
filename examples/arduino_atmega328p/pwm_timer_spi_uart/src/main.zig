@@ -61,8 +61,6 @@ export fn main() noreturn {
     pwm.set_duty_ch1(250); //            D9:  Lch
     pwm.set_duty_ch2(50); //             D10: Rch
 
-    asm volatile ("sei"); //             Eanble global interrupt
-
     // UART settings
     uart.init(115200); //                Set baudrate
     xf.xfunc_output = uart.putc; //      Set putc for xprintf()
@@ -70,17 +68,18 @@ export fn main() noreturn {
     var prev: i32 = 0;
     var ix: i32 = 0;
     systick.set_user_ticks_u16(1000); // 1sec = 1000msec
+    asm volatile ("sei"); //             Eanble global interrupt
     while (true) {
         if (systick.is_user_ticks_trigger()) {
             systick.clear_user_ticks_trigger();
-            pwm.disable_period_intr();
-            const pwm_counter = pwm_intr_counter; // Get 32bit data with atomic access
+            pwm.disable_period_intr(); // Start atomic access
+            const pwm_counter = pwm_intr_counter; // Get 32bit data
             pwm.enable_period_intr();
             xf.xprintf("\n[%04ld]  %5ld [Hz] : (PWM 44100 [Hz])", ix, pwm_counter - prev);
             prev = pwm_counter;
             ix += 1;
             if (ix > (20 - 1)) {
-               // systick.stop_user_ticks_u16(); //    Stop displaying after 20 lines
+                // systick.stop_user_ticks_u16(); //    Stop displaying after 20 lines
             }
         }
     }
