@@ -120,9 +120,10 @@ First comfirm avr-gcc version,
    myapp
    |-- build.zig
    |-- build.zig.zon
+   |-- template.lst          <== If you use 'make', an assebler list file will be generated
    |-- src
    |   |-- main.zig  
-   |   `-- root.zig         // Not used
+   |   `-- root.zig          <== Not used
    `-- zig-out
        `-- bin
            |-- template.elf

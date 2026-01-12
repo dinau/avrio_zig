@@ -10,7 +10,8 @@ const LED_PIN: u8 = 5; // D13
 const LED_BIT: u8 = io.BV(LED_PIN);
 
 // TIMER1_OVF_vect interrupt
-export fn __vector_13() callconv(.avr_interrupt) void {
+export const __vector_13 = TIMER1_OVF_vect;
+fn TIMER1_OVF_vect() callconv(.avr_interrupt) void {
     io.PORTB.* ^= LED_BIT;
     io.TCNT1.* = one_second;
 }

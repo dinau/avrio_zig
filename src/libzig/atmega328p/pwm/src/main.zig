@@ -19,11 +19,11 @@ pub const pwm = struct {
         }
     };
 
-    pub inline fn set_duty_ch1(d: u8) void { // Duty Left: Lch 0..255
+    pub inline fn set_duty_cha(d: u8) void { // Duty Left: Lch 0..255
         pwm1.duty(d);
     }
 
-    pub inline fn set_duty_ch2(d: u8) void { // Duty Right: Rch 0..255
+    pub inline fn set_duty_chb(d: u8) void { // Duty Right: Rch 0..255
         pwm2.duty(d);
     }
 

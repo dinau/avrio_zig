@@ -1,5 +1,5 @@
 // zig-0.15.2 2026/01
-// Simple Uart and xprintf() program for Arduino Uno/Nano
+// Simple Uart program for Arduino Uno/Nano
 
 const io = @import("atmega328p");
 
@@ -10,20 +10,20 @@ const TxData = io.UDR0;
 pub fn init(baud: u32) void {
     const baudFactor: u16 = @intCast(((F_CPU / 8) / baud) - 1);
     io.UCSR0A.* |= io.BV(io.U2X0);
-    io.UBRR0H.* = @intCast(baudFactor >> 8);
-    io.UBRR0L.* = @intCast(baudFactor);
+    io.UBRR0.* = @intCast(baudFactor); // Set baudrate
     //
-    io.UCSR0B.* = io.BV(io.RXEN0) | io.BV(io.TXEN0); // enable TX,RX
-    // 8bit, np, stb1
-    io.UCSR0C.* = (3 << io.UCSZ00) | (0 << io.USBS0) | (0 << io.UPM00);
+    io.UCSR0B.* = io.BV(io.RXEN0) | io.BV(io.TXEN0); // Enable TX,RX
+    // 8bit, np, stop bit 1
+    io.UCSR0C.* = 0;
+    io.UCSR0C.* |= (3 << io.UCSZ00); // Bit length 8
 }
 
-pub fn isFifoEmpty() bool {
+pub fn is_fifo_empty() bool {
     return (io.UCSR0A.* & io.BV(io.UDRE0)) != 0;
 }
 
 pub fn putc(ch: c_int) callconv(.c) void {
-    while (!isFifoEmpty()) {
+    while (!is_fifo_empty()) {
         // wait
     }
     TxData.* = @intCast(ch);

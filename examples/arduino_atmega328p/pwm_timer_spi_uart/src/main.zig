@@ -2,10 +2,14 @@
 // Simple Uart / PWM / SPI / Timer1 intrrupt and xprintf(),
 // test program for Arduino Uno/Nano
 
-// SPI
-// CS: PB0, 14pin, D8
-// or
-// CS: PD4,  6pin, D4 ,[actually hardware]
+// * SCK:  PB5, 19pin, D13
+// * MISO: PB4, 18pin, D12
+// * MOSI: PB3, 17pin, D11
+//
+// * CS:   PB0, 14pin, D8
+// * or
+// * CS:   PD4,  6pin, D4 [actually hardware]
+//
 
 const io = @import("atmega328p");
 const uart = @import("uart_atmega328p");
@@ -36,7 +40,8 @@ fn pwm_period_intr() void {
     spi.cs_off();
 }
 
-fn init_port() void { // set pull up to i/o port.
+// Set pull up to i/o port.
+fn init_port() void {
     io.PORTB.* = 0xFF;
     io.PORTC.* = 0xFF;
     io.PORTD.* = 0xFF;
@@ -49,17 +54,25 @@ fn init_port() void { // set pull up to i/o port.
 // -----
 export fn main() noreturn {
     init_port();
-    systick.init(); // Systick settings
-    spi.init(); //     SPI settings
+    systick.init(); //                  Systick settings
+                    //
+    // SPI settings
+    spi.init(.{
+        .enable = true,
+        .master = true,
+        .mode = 0,
+        .bit_order = .MSB,
+        .clock_divider = .div2, //      SPI clock: F_CPU / 2 = 8MHz
+    });
 
     // PWM settings
     const PWM_FREQ: i32 = 44100;
     pwm.init();
     pwm.set_period_hz(PWM_FREQ); //      PWM period frequency = 44100 Hz
+    pwm.set_duty_cha(250); //            D9:  Lch
+    pwm.set_duty_chb(50); //             D10: Rch
     pwm.enable_period_intr(); //         Enable PWM period interrupt
     pwm.start_period_timer(); //         PWM period timer start
-    pwm.set_duty_ch1(250); //            D9:  Lch
-    pwm.set_duty_ch2(50); //             D10: Rch
 
     // UART settings
     uart.init(115200); //                Set baudrate
@@ -72,7 +85,7 @@ export fn main() noreturn {
     while (true) {
         if (systick.is_user_ticks_trigger()) {
             systick.clear_user_ticks_trigger();
-            pwm.disable_period_intr(); // Start atomic access
+            pwm.disable_period_intr(); //            Start atomic access
             const pwm_counter = pwm_intr_counter; // Get 32bit data
             pwm.enable_period_intr();
             xf.xprintf("\n[%04ld]  %5ld [Hz] : (PWM 44100 [Hz])", ix, pwm_counter - prev);
