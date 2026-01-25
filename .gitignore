@@ -15,3 +15,5 @@ examples/arduino_atmega328p/build.zig.zon
 GPATH
 GRTAGS
 GTAGS
+freertos
+freertosx

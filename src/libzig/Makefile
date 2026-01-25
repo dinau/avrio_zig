@@ -1,10 +1,10 @@
-DIRS = \
-	atmega328p/iop  \
-	atmega328p/uart \
-	atmega328p/pwm  \
-	atmega328p/spi  \
+DIRS =                \
+	atmega328p/iop      \
+	atmega328p/uart     \
+	atmega328p/pwm      \
+	atmega328p/spi      \
 	atmega328p/systick  \
-	delay           \
+	delay               \
 	xprintf
 
 all:

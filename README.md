@@ -29,7 +29,7 @@ Now only supports **Arduino Uno 3** board. (ATMega328p)
 - Zig compiler  
 Windows: [zig-x86_64-windows-0.15.2.zip](https://ziglang.org/download/0.15.2/zig-x86_64-windows-0.15.2.zip)  
 Linux:   [zig-x86_64-linux-0.15.2.tar.xz](https://ziglang.org/download/0.15.2/zig-x86_64-linux-0.15.2.tar.xz)  
-(also zig-0.16.0-dev.2040+c475f1fcd is OK)
+(also zig-0.16.0-dev.2261 is OK)
 
 - avr-gcc: Using v7.3.0 for link stage  
     - You must use avr-gcc **v7.3.0** at this moment.  
@@ -120,7 +120,7 @@ First comfirm avr-gcc version,
    myapp
    |-- build.zig
    |-- build.zig.zon
-   |-- template.lst          <== If you use 'make', an assebler list file will be generated
+   |-- template.lst          <== If you use 'make', an assembler list file will be generated
    |-- src
    |   |-- main.zig  
    |   `-- root.zig          <== Not used
@@ -187,7 +187,7 @@ Reading | ################################################## | 100% 0.04 s
 Avrdude done.  Thank you.
 ```
 
-The COM port number must be appropriately set, such as -P COM3.  
+The COM port number must be appropriately set, such as `-P COM3`.  
 Or use AVRDUDESS or XLoader aforementioned.
 
 
@@ -237,7 +237,7 @@ $ zig build  # or make
 ---
 
 - Very simple [ChaN's xprintf()](https://elm-chan.org/fsw/strf/xprintf.html) test program
-- Uart with xprintf(), 115200bps baudrate
+- UART with xprintf(), 115200bps baudrate
 
 ```zig
 const io = @import("atmega328p");
@@ -290,8 +290,8 @@ Serial console out,
 ---
 
 Example, [pwm_timer_spi_uart: main.zig](examples/arduino_atmega328p/pwm_timer_spi_uart/src/main.zig),  
-- Timer interrupt and systick
-- Uart with xprintf(), 115200bps baudrate
+- Timer interrupt and Systick
+- UART with xprintf(), 115200bps baudrate
 - PWM out and its period interrupt  
 
    | Name        | Reg. | Port | IC pin | Ardiuno board pin |
@@ -301,13 +301,12 @@ Example, [pwm_timer_spi_uart: main.zig](examples/arduino_atmega328p/pwm_timer_sp
 
 - SPI data out, 8MHz clock  
 
-   | Name   | Port | IC Pin | Arduino board pin |
-   |--------|------|--------|-------------------|
-   | SPI CS | PB0  | 4pin   | D8                |
-   | SPI CS | PD4  | 6pin   | D4
-   | SCK    | PB5  | 19pin  | D13
-   | MISO   | PB4  | 18pin  | D12
-   | MOSI   | PB3  | 17pin  | D11
+   | Name   | Port      | IC Pin      | Arduino board pin |
+   |--------|-----------|-------------|-------------------|
+   | SPI CS | PB0 / PD4 | 4pin / 6pin | D8 / D4           |
+   | SCK    | PB5       | 19pin       | D13               |
+   | MISO   | PB4       | 18pin       | D12               |
+   | MOSI   | PB3       | 17pin       | D11               |
 
 
 Build,

@@ -10,3 +10,11 @@ clean:
 
 fmt:
 	zig fmt .
+
+
+TARGET_HEX = zig-out/bin/$(TARGET).hex
+PORT ?= COM3
+BAUDRATE ?= 115200
+
+w:
+	avrdude -c arduino -p m328p -P $(PORT) -b $(BAUDRATE)  -U flash:w:"$(TARGET_HEX)":a
