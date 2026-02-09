@@ -1,5 +1,6 @@
 #
-# Generate ISR vector definitions and bit operation funcions
+# 1. Generate bit operation funcions
+# 2. Generate ISR vector definitions : Currently doesn't genereate them.
 #
 # by dinau 2026/01
 #

@@ -2,7 +2,7 @@
 
 ---
 
-Just run `make` commad.
+Just run `make` command.
 
 ```sh
 $ make

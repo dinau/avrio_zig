@@ -27,9 +27,10 @@ Now only supports **Arduino Uno 3** board. (ATMega328p)
 ---
 
 - Zig compiler  
-Windows: [zig-x86_64-windows-0.15.2.zip](https://ziglang.org/download/0.15.2/zig-x86_64-windows-0.15.2.zip)  
-Linux:   [zig-x86_64-linux-0.15.2.tar.xz](https://ziglang.org/download/0.15.2/zig-x86_64-linux-0.15.2.tar.xz)  
-(also zig-0.16.0-dev.2261 is OK)
+- [x] 0.15.2  
+    Windows: [zig-x86_64-windows-0.15.2.zip](https://ziglang.org/download/0.15.2/zig-x86_64-windows-0.15.2.zip)  
+    Linux:   [zig-x86_64-linux-0.15.2.tar.xz](https://ziglang.org/download/0.15.2/zig-x86_64-linux-0.15.2.tar.xz)  
+- [x] 0.16.0-dev.2535 is OK  
 
 - avr-gcc: Using v7.3.0 for link stage  
     - You must use avr-gcc **v7.3.0** at this moment.  
